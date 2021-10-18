@@ -58,14 +58,18 @@
         items.forEach(function(item) {
 
             let div = document.createElement("div")
+            
 
             let author = document.createElement("h3");
             author.innerText= item.author;
             console.log(author)
             
+            
             let title = document.createElement("h1")
             title.innerText = item.title;
             console.log(title)
+            
+
 
             let content = document.createElement("p")
             content.innerText = item.content;
