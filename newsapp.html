@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hindu</title>
+
+    <style>
+        h1{
+            text-align: center;
+        }
+        .get{
+            
+            
+        }
+        #top{
+            margin-left: 100px;
+            text-align: right;
+        }
+        body{
+            background-color: cornsilk;
+        }
+    </style>
+</head>
+<body>
+
+    
+   <div id = "top"> <input type="text" class = "get" placeholder="Enter Name">
+    <button onclick="" class = "get">Get News</button></div>
+    <h1>The Hindu</h1>
+    <div><h1>Today's Headlines</h1></div>
+    <div id = "data"></div>
+    <div id = "items"></div>
+</body>
+</html>
+
+<script>
+   // let container = document.getElementById("data")
+    
+    async function getNews(){
+
+        let res = await fetch(`https://newsapi.org/v2/everything?domains=wsj.com&apiKey=1c5999cf92724e43ab234c6a0db48811`)
+    
+        let data = await res.json();
+        console.log(data.articles)
+
+        NewSearch(data.articles)
+    }
+
+    getNews()
+
+    let container = document.getElementById("items")
+
+    function NewSearch(items){
+
+        items.forEach(function(item) {
+
+            let div = document.createElement("div")
+
+            let author = document.createElement("h3");
+            author.innerText= item.author;
+            console.log(author)
+            
+            let title = document.createElement("h1")
+            title.innerText = item.title;
+            console.log(title)
+
+            let content = document.createElement("p")
+            content.innerText = item.content;
+            console.log(content)
+
+            let url = document.createElement("p")
+            url.innerText = item.url;
+
+            let urlToImage= document.createElement("img")
+            urlToImage.src = item.urlToImage;
+            //console.log(title)
+
+            div.append(title,urlToImage,author,content,url)
+            container.append(div)
+        });
+
+        
+    }
+
+    NewSearch()
+
+    
+
+</script>

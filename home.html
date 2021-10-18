@@ -1,0 +1,195 @@
+<!--  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #nav{
+            background-color: brown;
+            width: 500px;
+        }
+        body{
+            text-align: left;
+            margin-left: 800px;
+        }
+    </style>
+</head>
+<body>
+    <nav id = "nav">
+        <button Id = "Login">Login</button>
+        <label for="Search">Search</label>
+        <input type="text">
+
+    </nav>
+</body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+
+<style>
+    input {
+        width: 400px;
+        height: 20px;
+        margin-bottom: 20px;
+    }
+
+    .heading {
+        text-align: center;
+        color: brown;
+        background-color: teal;
+        margin: auto;
+    }
+
+    body {
+        background-color: white;
+    }
+    .sub{
+        width: 500px;
+        margin: auto;
+    }
+    #news{
+        width: 90%;
+        margin: auto;
+    }
+</style>
+
+<body>
+
+
+    <div class="heading">
+        <h1>THE NEWS</h1>
+    </div>
+
+    <div class=sub>
+        <input type="text" id="query" placeholder="search for news..." />
+        <button onclick="search()">search</button>
+    </div>
+
+    <div id="news"></div>
+
+</body>
+
+</html> -->
+<!-- 
+<script>
+
+    // key= 2b2a07d0e9974f8baad235ab2e3abbb0
+    let div = document.getElementById("news");
+
+
+
+    async function search() {
+
+        let news = document.getElementById("query").value;
+
+        let res = await fetch(`https://newsapi.org/v2/everything?q=${news}&from=2021-08-13&sortBy=publishedAt&apiKey=2b2a07d0e9974f8baad235ab2e3abbb0`);
+        let data = await res.json();
+        console.log("data", data);
+
+
+        for (var i = 0; i <= 20; i++) {
+
+
+            let author = document.createElement("p");
+            author.innerHTML = data.articles[i].author;
+
+            let content = document.createElement("p");
+            content.innerHTML = `Contents :- ${data.articles[i].content}`
+
+            let description = document.createElement("p");
+            description.innerHTML = data.articles[i].description;
+
+            let image = document.createElement("img");
+            image.src = data.articles[i].urlToImage;
+
+            let url = document.createElement("p")
+            url = data.articles[i].url;
+            console.log(url);
+
+
+            div.append(author, content, image, description);
+
+        }
+
+
+        // console.log(author);
+
+
+
+    }
+
+</script> --> 
+
+<!-- 1c5999cf92724e43ab234c6a0db48811 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hindu</title>
+</head>
+<body>
+    <input type="text" id = "new" placeholder="Enter Name">
+    <button onclick="">Get News</button>
+    <div><h1>Today's Headlines</h1></div>
+    <div id = "data"></div>
+    <div id = "items"></div>
+</body>
+</html>
+
+<script>
+    let container = document.getElementById("data")
+    
+    async function getNews(){
+
+        let res = await fetch(`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=1c5999cf92724e43ab234c6a0db48811`)
+    
+        let data = await res.json();
+        console.log(data.articles)
+
+        NewSearch(data.articles)
+    }
+
+    getNews()
+
+    let container = document.getElementById("items")
+
+    function NewSearch(items){
+
+        items.forEach(function(item) {
+
+            let div = document.createElement("div")
+
+            let author = document.createElement("p")
+            author.innerText = item.author;
+            console.log(author)
+            
+            let title = document.createElement("div")
+            title.innerText = item.title;
+            console.log(title)
+
+            div.append(author,title)
+            container.append(div)
+        });
+
+        
+    }
+
+    NewSearch()
+
+    
+
+</script>
